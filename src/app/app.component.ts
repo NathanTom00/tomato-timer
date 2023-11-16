@@ -9,6 +9,8 @@ export class AppComponent {
   title = 'pomodoro-timer';
 
   counterTime = { mins: 25, secs: 0 };
+  percent = 100;
+  percentToSub = 100/(this.counterTime.mins*60 + this.counterTime.secs)
   timerStarting = false
   intervalID!: any
   paused = false
@@ -28,8 +30,10 @@ export class AppComponent {
       if(this.counterTime.secs == 0){
         this.counterTime.mins -= 1
         this.counterTime.secs = 59
-      }else
+      }else{
         this.counterTime.secs -=1
+        this.percent -= this.percentToSub
+      }
     }, 1000);
   }
 
@@ -45,7 +49,9 @@ export class AppComponent {
 
   resetTimer(){
     this.counterTime = { mins: 25, secs: 0 };
+    this.percent=100
     this.timerStarting = false
     this.paused = false
   }
+
 }

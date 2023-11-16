@@ -1,25 +1,51 @@
-<div class="container">
-  <h2>
-    {{counterTime.mins | number : '2.0'}}:{{counterTime.secs | number : '2.0'}}
-  </h2>
-  <button mat-fab matTooltip="Basic" *ngIf="!timerStarting" (click)="startTimer($event)" >
-    <mat-icon>play_arrow</mat-icon>
-  </button>
-  <button mat-fab matTooltip="Basic" *ngIf="timerStarting && !paused" (click)="pauseTimer()">
-    <mat-icon>pause</mat-icon>
-  </button>
+<div class="container" style="background-color: #d62e2e">
+  <div>
+    <circle-progress
+      [percent]="percent"
+      [title]="
+        (counterTime.mins | number : '2.0') +
+        ':' +
+        (counterTime.secs | number : '2.0')
+      "
+      [radius]="100"
+      [showUnits]="false"
+      [showSubtitle]="false"
+      [outerStrokeWidth]="16"
+      [innerStrokeWidth]="6"
+      [outerStrokeColor]="'white'"
+      [innerStrokeColor]=" '#b4a12d'"
+      [titleColor]="'white'"
+      [titleFontSize]="'40'"
+      [clockwise]="false"
+      [animation]="false"
+    ></circle-progress>
+  </div>
 
-  <button mat-fab matTooltip="Basic" *ngIf="paused" (click)="resumeTimer()">
-    <mat-icon>
-      <span class="material-symbols-outlined">
-        resume
-      </span>
-    </mat-icon>
-  </button>
-  <button mat-fab matTooltip="Basic" *ngIf="paused" (click)="resetTimer()">
-    <mat-icon>stop</mat-icon>
-  </button>
+  <div>
+    <button
+      mat-fab
+      matTooltip="Basic"
+      *ngIf="!timerStarting"
+      (click)="startTimer($event)"
+    >
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+    <button
+      mat-fab
+      matTooltip="Basic"
+      *ngIf="timerStarting && !paused"
+      (click)="pauseTimer()"
+    >
+      <mat-icon>pause</mat-icon>
+    </button>
 
-  
-
+    <button mat-fab matTooltip="Basic" *ngIf="paused" (click)="resumeTimer()">
+      <mat-icon>
+        <span class="material-symbols-outlined"> resume </span>
+      </mat-icon>
+    </button>
+    <button mat-fab matTooltip="Basic" *ngIf="paused" (click)="resetTimer()">
+      <mat-icon>stop</mat-icon>
+    </button>
+  </div>
 </div>
