@@ -2,7 +2,20 @@
   <h2>
     {{counterTime.mins | number : '2.0'}}:{{counterTime.secs | number : '2.0'}}
   </h2>
-  <button (click)="startTimer($event)" >
+  <button *ngIf="!timerStarting" (click)="startTimer($event)" >
     START
   </button>
+  <button *ngIf="timerStarting && !paused" (click)="pauseTimer()">
+    Pause
+  </button>
+
+  <button *ngIf="paused" (click)="resumeTimer()">
+    Resume
+  </button>
+  <button *ngIf="paused" (click)="resetTimer()">
+    Reset
+  </button>
+
+  
+
 </div>
