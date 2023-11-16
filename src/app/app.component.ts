@@ -23,7 +23,7 @@ export class AppComponent {
 
   doCountdown(){
     return setInterval(() => {
-      if (this.counterTime.mins == 0 && this.counterTime.secs == 0){
+      if (this.timerDone()){
         this.timerStarting = false;
         clearInterval(this.intervalID);
       }
@@ -35,6 +35,10 @@ export class AppComponent {
         this.percent -= this.percentToSub
       }
     }, 1000);
+  }
+
+  timerDone() : boolean {
+    return this.counterTime.mins == 0 && this.counterTime.secs == 0
   }
 
   pauseTimer(){
