@@ -2,18 +2,22 @@
   <h2>
     {{counterTime.mins | number : '2.0'}}:{{counterTime.secs | number : '2.0'}}
   </h2>
-  <button *ngIf="!timerStarting" (click)="startTimer($event)" >
-    START
+  <button mat-fab matTooltip="Basic" *ngIf="!timerStarting" (click)="startTimer($event)" >
+    <mat-icon>play_arrow</mat-icon>
   </button>
-  <button *ngIf="timerStarting && !paused" (click)="pauseTimer()">
-    Pause
+  <button mat-fab matTooltip="Basic" *ngIf="timerStarting && !paused" (click)="pauseTimer()">
+    <mat-icon>pause</mat-icon>
   </button>
 
-  <button *ngIf="paused" (click)="resumeTimer()">
-    Resume
+  <button mat-fab matTooltip="Basic" *ngIf="paused" (click)="resumeTimer()">
+    <mat-icon>
+      <span class="material-symbols-outlined">
+        resume
+      </span>
+    </mat-icon>
   </button>
-  <button *ngIf="paused" (click)="resetTimer()">
-    Reset
+  <button mat-fab matTooltip="Basic" *ngIf="paused" (click)="resetTimer()">
+    <mat-icon>stop</mat-icon>
   </button>
 
   
