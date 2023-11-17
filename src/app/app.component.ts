@@ -1,4 +1,16 @@
 import { Component } from '@angular/core';
+import { AlertService } from './services/alert.service';
+
+const sessions = {
+  study : {
+    mins: 0,
+    secs: 15
+  },
+  break : {
+    mins: 0,
+    secs: 10
+  }
+}
 
 @Component({
   selector: 'app-root',
@@ -7,16 +19,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pomodoro-timer';
-
-  counterTime = { mins: 25, secs: 0 };
+  
+  session = 'study'
+  counterTime = {mins: sessions.study.mins , secs: sessions.study.secs}
   percent = 100;
   percentToSub = 100/(this.counterTime.mins*60 + this.counterTime.secs)
   timerStarting = false
   intervalID!: any
   paused = false
-  constructor() {}
+  constructor(private alertService : AlertService) {}
 
-  startTimer(event : any) {
+  startTimer() {
     this.timerStarting = true
     this.intervalID = this.doCountdown()
   }
@@ -24,8 +37,18 @@ export class AppComponent {
   doCountdown(){
     return setInterval(() => {
       if (this.timerDone()){
-        this.timerStarting = false;
-        clearInterval(this.intervalID);
+        this.alertService.playAudio()
+        if (this.session === 'study'){
+          this.session = 'break'
+          this.counterTime = {mins: sessions.break.mins, secs: sessions.break.secs}
+        }
+        else{
+          this.session = 'study'
+          this.counterTime = {mins: sessions.study.mins,secs: sessions.study.secs}
+        }
+        
+        this.percent = 100;
+        this.percentToSub = 100/(this.counterTime.mins*60 + this.counterTime.secs)
       }
       if(this.counterTime.secs == 0){
         this.counterTime.mins -= 1
@@ -52,7 +75,8 @@ export class AppComponent {
   }
 
   resetTimer(){
-    this.counterTime = { mins: 25, secs: 0 };
+    
+    this.counterTime = (this.session === 'study')? {mins: sessions.study.mins,secs: sessions.study.secs}:{mins: sessions.break.mins, secs: sessions.break.secs} ;
     this.percent=100
     this.timerStarting = false
     this.paused = false

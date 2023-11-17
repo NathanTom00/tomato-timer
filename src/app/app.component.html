@@ -1,5 +1,10 @@
 <div class="container" style="background-color: #d62e2e">
   <div>
+    <h1 style="color: white;font-size: 40px">
+      {{session|uppercase}} TIME
+    </h1>
+  </div>
+  <div>
     <circle-progress
       [percent]="percent"
       [title]="
@@ -24,29 +29,19 @@
   </div>
 
   <div>
-    <button
-      mat-fab
-      matTooltip="Basic"
-      *ngIf="!timerStarting"
-      (click)="startTimer($event)"
-    >
+    <button mat-fab matTooltip="Basic" *ngIf="!timerStarting" (click)="startTimer()">
       <mat-icon>play_arrow</mat-icon>
     </button>
-    <button
-      mat-fab
-      matTooltip="Basic"
-      *ngIf="timerStarting && !paused"
-      (click)="pauseTimer()"
-    >
+    <button mat-fab matTooltip="Basic" *ngIf="timerStarting && !paused" (click)="pauseTimer()">
       <mat-icon>pause</mat-icon>
     </button>
 
-    <button mat-fab matTooltip="Basic" *ngIf="paused" (click)="resumeTimer()">
+    <button mat-fab matTooltip="Basic" *ngIf="paused" (click)="resumeTimer()" style="margin-right: 10px;">
       <mat-icon>
         <span class="material-symbols-outlined"> resume </span>
       </mat-icon>
     </button>
-    <button mat-fab matTooltip="Basic" *ngIf="paused" (click)="resetTimer()">
+    <button mat-fab matTooltip="Basic" *ngIf="paused" (click)="resetTimer()" style="margin-left: 10px;">
       <mat-icon>stop</mat-icon>
     </button>
   </div>
