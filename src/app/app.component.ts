@@ -3,12 +3,12 @@ import { AlertService } from './services/alert.service';
 
 const sessions = {
   study : {
-    mins: 0,
-    secs: 15
+    mins: 25,
+    secs: 0
   },
   break : {
-    mins: 0,
-    secs: 10
+    mins: 5,
+    secs: 0
   }
 }
 
